@@ -1,7 +1,27 @@
 require 'rails'
-require 'rails/generators/active_record/migration/migration_generator'
 
-class MiGenerator < ActiveRecord::Generators::MigrationGenerator
-  ar_root = Bundler.load.specs.find{|s|s.name =='activerecord'}.full_gem_path
-  source_root Pathname.new(ar_root).join('lib/rails/generators/active_record/migration/templates/')
+class MiGenerator < Rails::Generators::Base
+  source_root File.expand_path('../templates', __FILE__)
+
+  def doing
+    require 'pry'
+    binding.pry
+  end
+
+
+  private
+
+  def arg_groups
+    args = @_initializer[0..1].flatten
+
+    current = nil
+    res = args.group_by do |a|
+      current = a unless %w[+ - %].include? a[0]
+      current
+    end
+
+    res.each{|_key, val| val.shift}
+
+    res
+  end
 end
