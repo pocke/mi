@@ -16,12 +16,14 @@ class MiGenerator < Rails::Generators::Base
 
     current = nil
     res = args.group_by do |a|
-      current = a unless %w[+ - %].include? a[0]
-      current
+      if %w[+ - %].include? a[0]
+        current
+      else
+        current = a
+        nil
+      end
     end
-
-    res.each{|_key, val| val.shift}
-
+    res.delete(nil)
     res
   end
 end
