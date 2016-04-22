@@ -1,0 +1,13 @@
+class <%= migration_class_name %> < ActiveRecord::Migration
+  def change
+<%- arg_groups.each do |table, columns| -%>
+  <%- columns.each do |column| -%>
+    <%- col_info = parse_column(column) -%>
+    <%- case col_info[:kind] -%>
+    <%- when '+' -%>
+    add_column :<%= table %>, :<%= col_info[:name] %>, :<%= col_info[:type] %>, <%= col_info[:options] %>
+    <%- end -%>
+  <%- end -%>
+<%- end -%>
+  end
+end
