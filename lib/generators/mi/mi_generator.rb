@@ -59,7 +59,26 @@ class MiGenerator < Rails::Generators::Base
     res
   end
 
+  def to_dest(col)
+    parsed = parse_column(col)
+    verb =
+      case parsed[:method]
+      when '+'
+        'add'
+      when '-'
+        'remove'
+      when '%'
+        'change'
+      end
+    [verb, parsed[:name]]
+  end
+
   def destination
-    return 'TODO'
+    table, columns = *arg_groups.first
+    [
+      columns.map{|c| to_dest(c)}.inject{|sum, x| sum.concat(['and', x].flatten)},
+      'to',
+      table.tableize,
+    ].flatten.join('_')
   end
 end
