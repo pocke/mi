@@ -1,6 +1,14 @@
 require 'rails'
+require 'rails/generators/migration'
 
 class MiGenerator < Rails::Generators::Base
+  include Rails::Generators::Migration
+
+  def self.next_migration_number(dirname)
+    next_migration_number = current_migration_number(dirname) + 1
+    ActiveRecord::Migration.next_migration_number(next_migration_number)
+  end
+
   Methods = {
     '+' => 'add_column',
     '-' => 'remove_column',
@@ -10,7 +18,7 @@ class MiGenerator < Rails::Generators::Base
   source_root File.expand_path('../templates', __FILE__)
 
   def doing
-    template 'migration.rb.erb', 'db/migrate/hogehoge.rb'
+    migration_template('migration.rb.erb', "db/migrate/#{destination}.rb")
   end
 
 
@@ -34,10 +42,6 @@ class MiGenerator < Rails::Generators::Base
     )
   end
 
-  def migration_class_name
-    'TODO'
-  end
-
   # TODO: parse options
   # @param [String] col +COL_NAME:TYPE:{OPTIONS}
   def parse_column(col)
@@ -53,5 +57,9 @@ class MiGenerator < Rails::Generators::Base
     res = "#{Methods[info[:method]]} :#{table}, :#{info[:name]}, :#{info[:type]}"
     res << info[:options] if info[:options]
     res
+  end
+
+  def destination
+    return 'TODO'
   end
 end
