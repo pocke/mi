@@ -1,6 +1,12 @@
 require 'rails'
 
 class MiGenerator < Rails::Generators::Base
+  Methods = {
+    '+' => 'add_column',
+    '-' => 'remove_column',
+    '%' => 'change_column',
+  }.freeze
+
   source_root File.expand_path('../templates', __FILE__)
 
   def doing
@@ -32,12 +38,20 @@ class MiGenerator < Rails::Generators::Base
     'TODO'
   end
 
+  # TODO: parse options
+  # @param [String] col +COL_NAME:TYPE:{OPTIONS}
   def parse_column(col)
     name, type, options = *col.split(':')
-    require 'pry'
-    binding.pry
-    kind = name[0]
+    method = name[0]
     name = name[1..-1]
-    {name: name, type: type, options: options, kind: kind}
+    {name: name, type: type, options: options, method: method}
+  end
+
+  # @param [String] col +COL_NAME:TYPE:{OPTIONS}
+  def to_method(table, col)
+    info = parse_column(col)
+    res = "#{Methods[info[:method]]} :#{table}, :#{info[:name]}, :#{info[:type]}"
+    res << info[:options] if info[:options]
+    res
   end
 end
