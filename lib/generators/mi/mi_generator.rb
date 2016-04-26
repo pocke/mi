@@ -1,5 +1,7 @@
 require 'rails'
-require 'rails/generators/migration'
+require 'rails/generators'
+require 'active_record'
+
 
 class MiGenerator < Rails::Generators::Base
   include Rails::Generators::Migration
@@ -26,7 +28,7 @@ class MiGenerator < Rails::Generators::Base
 
   def arg_groups
     @arg_groups ||= (
-      args = @_initializer[0..1].flatten
+      args = @_initializer[0..1].flatten.reject{|x| x.start_with?('--')}
 
       current = nil
       res = args.group_by do |a|
