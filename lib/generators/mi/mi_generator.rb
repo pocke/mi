@@ -54,8 +54,14 @@ class MiGenerator < Rails::Generators::Base
   # @param [String] col +COL_NAME:TYPE:{OPTIONS}
   def to_method(table, col)
     info = parse_column(col)
-    res = "#{Methods[info[:method]]} :#{table}, :#{info[:name]}, :#{info[:type]}"
-    res << info[:options] if info[:options]
+    res = "#{Methods[info[:method]]} :#{table}, :#{info[:name]}"
+
+    return res unless info[:type]
+    res << ", :#{info[:type]}"
+
+    return res unless info[:options]
+    res << info[:options]
+
     res
   end
 
