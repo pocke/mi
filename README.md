@@ -1,12 +1,12 @@
 # Mi
 
-
 [![Gem Version](https://badge.fury.io/rb/mi.svg)](https://badge.fury.io/rb/mi)
 [![Build Status](https://travis-ci.org/pocke/mi.svg?branch=master)](https://travis-ci.org/pocke/mi)
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/mi`. To experiment with that code, run `bin/console` for an interactive prompt.
+`mi` is a generator of migration file instead of `rails generate migration`.
 
-TODO: Delete this and the text above, and describe your gem
+- Simple Syntax
+- Automatically generate class name.
 
 ## Installation
 
@@ -26,13 +26,57 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+### add_column
 
-## Development
+```sh
+$ bin/rails g mi users +email:string
+      create  db/migrate/20160429062420_add_email_to_users.rb
+```
 
-After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+`db/migrate/20160429062420_add_email_to_users.rb`
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+```ruby
+class AddEmailToUsers < ActiveRecord::Migration
+  def change
+    add_column :users, :email, :string, null: false
+  end
+end
+```
+
+### remove_column
+
+```sh
+$ bin/rails g mi users -email
+      create  db/migrate/20160429124502_remove_email_to_users.rb
+```
+
+`db/migrate/20160429124502_remove_email_to_users.rb`
+
+```ruby
+class RemoveEmailToUsers < ActiveRecord::Migration
+  def change
+    remove_column :users, :email
+  end
+end
+```
+
+
+### change_column
+
+```sh
+$ bin/rails g mi users %email:string:{null:true}
+      create  db/migrate/20160429124852_change_email_to_users.rb
+```
+
+`db/migrate/20160429124852_change_email_to_users.rb`
+
+```ruby
+class ChangeEmailToUsers < ActiveRecord::Migration
+  def change
+    change_column :users, :email, :string, null: true
+  end
+end
+```
 
 ## Contributing
 

@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Masataka Kuwabara"]
   spec.email         = ["p.ck.t22@gmail.com"]
 
-  spec.summary       = %q{}
-  spec.description   = %q{}
+  spec.summary       = %q{Better `rails g migration`}
+  spec.description   = %q{Mi is a generator of migration file instead of `rails generate migration`.}
   spec.homepage      = "https://github.com/pocke/mi"
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
