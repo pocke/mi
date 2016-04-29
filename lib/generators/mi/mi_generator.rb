@@ -1,6 +1,7 @@
 require 'rails'
 require 'rails/generators'
 require 'active_record'
+require 'strscan'
 
 
 class MiGenerator < Rails::Generators::Base
@@ -47,7 +48,13 @@ class MiGenerator < Rails::Generators::Base
   # TODO: parse options
   # @param [String] col +COL_NAME:TYPE:{OPTIONS}
   def parse_column(col)
-    name, type, options = *col.split(':')
+    sc = StringScanner.new(col)
+    name = sc.scan(/[^:]+/)
+    sc.scan(/:/)
+    type = sc.scan(/[^:]+/)
+    sc.scan(/:/)
+    options = sc.scan(/\{.+\}$/)
+
     method = name[0]
     name = name[1..-1]
     {name: name, type: type, options: options, method: method}
@@ -62,7 +69,7 @@ class MiGenerator < Rails::Generators::Base
     res << ", :#{info[:type]}"
 
     return res unless info[:options]
-    res << info[:options]
+    res << ", #{info[:options][1..-2].gsub(':', ': ').gsub(',', ', ')}"
 
     res
   end

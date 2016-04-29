@@ -48,4 +48,15 @@ describe MiGenerator do
       is_asserted_by{ File.read(last_migration_file).include? 'remove_column :users, :email' }
     end
   end
+
+  context 'when add a column with not null' do
+    let(:arguments){%w[users +email:string:{null:false,default:"foo@example.com"}]}
+
+    include_examples 'should_valid_as_a_ruby_script'
+
+    it 'has null false' do
+      subject
+      is_asserted_by{ File.read(last_migration_file).include? 'add_column :users, :email, :string, null: false, default: "foo@example.com"' }
+    end
+  end
 end
