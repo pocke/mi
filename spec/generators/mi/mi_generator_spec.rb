@@ -8,8 +8,6 @@ describe MiGenerator do
     test_case.destination_root = SPEC_TMP_DPR
   end
 
-  let(:last_migration_file){Dir.glob(Pathname.new(SPEC_TMP_DPR)/'db/migrate/*.rb').last}
-
   after do
     FileUtils.remove_entry_secure(Pathname.new(SPEC_TMP_DPR)/'db/migrate/')
   end
@@ -34,7 +32,7 @@ describe MiGenerator do
 
     it 'has `add_column`' do
       subject
-      is_asserted_by{ File.read(last_migration_file).include? 'add_column :users, :email, :string' }
+      migration_file_include? 'add_column :users, :email, :string'
     end
 
     it 'has to in filename' do
@@ -50,7 +48,7 @@ describe MiGenerator do
 
     it 'has `remove_column`' do
       subject
-      is_asserted_by{ File.read(last_migration_file).include? 'remove_column :users, :email' }
+      migration_file_include? 'remove_column :users, :email'
     end
 
     it 'has from in filename' do
@@ -66,7 +64,7 @@ describe MiGenerator do
 
     it 'should has change_column' do
       subject
-      is_asserted_by{ File.read(last_migration_file).include? 'change_column :users, :email, :string, null: true' }
+      migration_file_include? 'change_column :users, :email, :string, null: true'
     end
 
     it 'has from in filename' do
@@ -82,7 +80,7 @@ describe MiGenerator do
 
     it 'has null false' do
       subject
-      is_asserted_by{ File.read(last_migration_file).include? 'add_column :users, :email, :string, null: false, default: "foo@example.com"' }
+      migration_file_include? 'add_column :users, :email, :string, null: false, default: "foo@example.com"'
     end
   end
 end
