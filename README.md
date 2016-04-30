@@ -38,7 +38,7 @@ $ bin/rails g mi users +email:string
 ```ruby
 class AddEmailToUsers < ActiveRecord::Migration
   def change
-    add_column :users, :email, :string, null: false
+    add_column :users, :email, :string
   end
 end
 ```
