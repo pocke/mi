@@ -90,9 +90,14 @@ class MiGenerator < Rails::Generators::Base
 
   def destination
     table, columns = *arg_groups.first
+    c = {
+      '+' => 'to',
+      '-' => 'from',
+      '%' => 'of'
+    }[parse_column(columns.last)[:method]]
     [
       columns.map{|c| to_dest(c)}.inject{|sum, x| sum.concat(['and', x].flatten)},
-      'to',
+      c,
       table.tableize,
     ].flatten.join('_')
   end
