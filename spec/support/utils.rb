@@ -8,7 +8,3 @@ module UtilsInclude
     is_asserted_by{ got.include? expected }
   end
 end
-
-module UtilsExtend
-  
-end
