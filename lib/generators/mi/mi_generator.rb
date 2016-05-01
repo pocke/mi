@@ -21,15 +21,24 @@ class MiGenerator < Rails::Generators::Base
   source_root File.expand_path('../templates', __FILE__)
 
   def doing
+    if arguments.include?('--version')
+      puts Mi::VERSION
+      return
+    end
+
     migration_template('migration.rb.erb', "db/migrate/#{destination}.rb")
   end
 
 
   private
 
+  def arguments
+    @_initializer[0..1].flatten
+  end
+
   def arg_groups
     @arg_groups ||= (
-      args = @_initializer[0..1].flatten.reject{|x| x.start_with?('--')}
+      args = arguments.reject{|x| x.start_with?('--')}
 
       current = nil
       res = args.group_by do |a|
