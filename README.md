@@ -78,6 +78,18 @@ class ChangeEmailToUsers < ActiveRecord::Migration
 end
 ```
 
+## Dependencies
+
+- Ruby 2.2 or higher #9
+- Rails 4 #12
+
+
+## TODOs
+
+- Support `create_talbe`
+- Support Rails 5
+
+
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/pocke/mi.
