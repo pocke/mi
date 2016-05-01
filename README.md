@@ -80,14 +80,14 @@ end
 
 ## Dependencies
 
-- Ruby 2.2 or higher #9
-- Rails 4 #12
+- Ruby 2.2 or higher
+- Rails 4
 
 
 ## TODOs
 
-- Support `create_talbe`
-- Support Rails 5
+- Support `create_talbe` [#9](https://github.com/pocke/mi/issues/9)
+- Support Rails 5 [#12](https://github.com/pocke/mi/issues/12)
 
 
 ## Contributing
