@@ -13,7 +13,9 @@
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'mi'
+group :development do
+  gem 'mi'
+end
 ```
 
 And then execute:
@@ -94,3 +96,7 @@ end
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/pocke/mi.
 
+
+## Links
+
+- [もっと便利に rails g migration する - pockestrap](http://pocke.hatenablog.com/entry/2016/05/01/132228)
