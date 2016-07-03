@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe MiGenerator do
+describe Mi::Generators::MiGenerator do
   let(:test_case){Class.new(Rails::Generators::TestCase)}
   subject{test_case.new(:doing).run_generator(arguments)}
   before do
