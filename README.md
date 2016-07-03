@@ -2,6 +2,7 @@
 
 [![Gem Version](https://badge.fury.io/rb/mi.svg)](https://badge.fury.io/rb/mi)
 [![Build Status](https://travis-ci.org/pocke/mi.svg?branch=master)](https://travis-ci.org/pocke/mi)
+[![Coverage Status](https://coveralls.io/repos/github/pocke/mi/badge.svg?branch=master)](https://coveralls.io/github/pocke/mi?branch=master)
 [![Stories in Ready](https://badge.waffle.io/pocke/mi.svg?label=ready&title=Ready)](http://waffle.io/pocke/mi)
 
 `mi` is a generator of migration file instead of `rails generate migration`.

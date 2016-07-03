@@ -34,4 +34,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'guard-bundler', '~> 2.1.0'
   spec.add_development_dependency 'pry', '~> 0.10.3'
   spec.add_development_dependency 'rspec-power_assert', '~> 0.3.0'
+  spec.add_development_dependency 'coveralls', '~> 0.8.13'
+  spec.add_development_dependency 'simplecov', '~> 0.11.0'
 end
