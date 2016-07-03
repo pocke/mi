@@ -7,11 +7,6 @@ module Mi
       namespace "mi"
 
       def doing
-        if arguments.include?('--version')
-          puts Mi::VERSION
-          return
-        end
-
         migration_template('migration.rb.erb', "db/migrate/#{destination}.rb")
       end
 
