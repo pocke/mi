@@ -1,14 +1,9 @@
-require 'rails'
-require 'rails/generators'
-require 'active_record'
-require 'strscan'
-
+require 'generators/mi'
 
 module Mi
   module Generators
     class CreateGenerator < Rails::Generators::Base
-      include Rails::Generators::Migration
-
+      source_root File.expand_path('../templates', __FILE__)
     end
   end
 end
