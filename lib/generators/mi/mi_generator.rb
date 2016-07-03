@@ -47,7 +47,7 @@ module Mi
         c = {
           '+' => 'to',
           '-' => 'from',
-          '%' => 'of'
+          '%' => 'of',
         }[parse_column(columns.last)[:method]]
         [
           columns.map{|c| to_dest(c)}.inject{|sum, x| sum.concat(['and', x].flatten)},
