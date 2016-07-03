@@ -19,6 +19,7 @@ module Mi
       # e.g.) t.string :email
       def to_method(col)
         info = parse_column(col)
+        # TODO: when type is not specified, migration file would be created.
         raise TypeIsRequired, "When mi:create, type is required. Please specify type like `#{info[:name]}:TYPE`" unless info[:type]
 
         res = "t.#{info[:type]} :#{info[:name]}"

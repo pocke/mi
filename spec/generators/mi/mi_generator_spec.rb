@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe Mi::Generators::MiGenerator do
-  context 'when add a column', :with_doing do
+describe Mi::Generators::MiGenerator, :with_doing do
+  context 'when add a column' do
     let(:arguments){%w[users +email:string]}
 
     include_examples 'should_valid_as_a_ruby_script'
@@ -17,7 +17,7 @@ describe Mi::Generators::MiGenerator do
     end
   end
 
-  context 'when remove a column', :with_doing do
+  context 'when remove a column' do
     let(:arguments){%w[users -email]}
 
     include_examples 'should_valid_as_a_ruby_script'
@@ -33,7 +33,7 @@ describe Mi::Generators::MiGenerator do
     end
   end
 
-  context 'when change column', :with_doing do
+  context 'when change column' do
     let(:arguments){%w[users %email:string:{null:true}]}
 
     include_examples 'should_valid_as_a_ruby_script'
@@ -49,7 +49,7 @@ describe Mi::Generators::MiGenerator do
     end
   end
 
-  context 'when add a column with not null', :with_doing do
+  context 'when add a column with not null' do
     let(:arguments){%w[users +email:string:{null:false,default:"foo@example.com"}]}
 
     include_examples 'should_valid_as_a_ruby_script'
