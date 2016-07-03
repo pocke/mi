@@ -21,6 +21,7 @@ module Mi
       }.freeze
 
       source_root File.expand_path('../templates', __FILE__)
+      namespace "mi"
 
       def doing
         if arguments.include?('--version')
