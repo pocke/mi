@@ -17,6 +17,17 @@ describe Mi::Generators::CreateGenerator, :with_doing do
     end
   end
 
+  context 'when has a option' do
+    let(:arguments){%w[users +email:string:{null:false}]}
+
+    include_examples 'should_valid_as_a_ruby_script'
+
+    it 'has a `null: false`' do
+      subject
+      migration_file_include? 't.string :email, null: false'
+    end
+  end
+
   context 'when type is not specified' do
     let(:arguments){%w[users +email]}
 
