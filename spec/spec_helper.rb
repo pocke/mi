@@ -24,7 +24,7 @@ require 'pry'
 SPEC_TMP_DPR = File.expand_path('../../tmp/', __FILE__)
 Dir[File.expand_path('../support/**/*.rb', __FILE__)].each{|f| require f}
 
-require 'generators/mi/mi_generator'
+require 'mi'
 
 RSpec.configure do |config|
   config.include UtilsInclude
