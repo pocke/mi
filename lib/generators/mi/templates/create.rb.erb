@@ -1,0 +1,13 @@
+class <%= migration_class_name %> < ActiveRecord::Migration
+  def change
+    create_table :<%= table_name %> do |t|
+<%- arg_groups.each do |_table, columns| -%>
+  <%- columns.each do |column| -%>
+      <%= to_method(column) %>
+  <%- end -%>
+<%- end -%>
+
+      t.timestamps null: false
+    end
+  end
+end

@@ -90,7 +90,6 @@ end
 
 ## TODOs
 
-- Support `create_talbe` [#9](https://github.com/pocke/mi/issues/9)
 - Support Rails 5 [#12](https://github.com/pocke/mi/issues/12)
 
 

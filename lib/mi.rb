@@ -1,5 +1,4 @@
 require "mi/version"
-
-module Mi
-  # Your code goes here...
-end
+require 'generators/mi'
+require 'generators/mi/mi_generator'
+require 'generators/mi/create_generator'
