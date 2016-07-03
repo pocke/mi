@@ -24,4 +24,20 @@ describe Mi::Generators::CreateGenerator, :with_doing do
       expect{subject}.to raise_error Mi::Generators::CreateGenerator::TypeIsRequired
     end
   end
+
+  context 'when has a remove column' do
+    let(:arguments){%w[users -email:string]}
+
+    it 'should raise error' do
+      expect{subject}.to raise_error Mi::Generators::CreateGenerator::NotAllowMethod
+    end
+  end
+
+  context 'when has a change column' do
+    let(:arguments){%w[users %email:string]}
+
+    it 'should raise error' do
+      expect{subject}.to raise_error Mi::Generators::CreateGenerator::NotAllowMethod
+    end
+  end
 end

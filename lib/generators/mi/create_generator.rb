@@ -4,6 +4,7 @@ module Mi
   module Generators
     class CreateGenerator < Base
       class TypeIsRequired < StandardError; end
+      class NotAllowMethod < StandardError; end
 
       source_root File.expand_path('../templates', __FILE__)
 
@@ -21,6 +22,7 @@ module Mi
         info = parse_column(col)
         # TODO: when type is not specified, migration file would be created.
         raise TypeIsRequired, "When mi:create, type is required. Please specify type like `#{info[:name]}:TYPE`" unless info[:type]
+        raise NotAllowMethod, "#{info[:method]} is not allowed. You can only use `+` when `mi:create`" unless info[:method] == '+'
 
         res = "t.#{info[:type]} :#{info[:name]}"
 
