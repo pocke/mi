@@ -1,31 +1,7 @@
 require 'spec_helper'
 
 describe Mi::Generators::MiGenerator do
-  let(:test_case){Class.new(Rails::Generators::TestCase)}
-  subject{test_case.new(:doing).run_generator(arguments)}
-  before do
-    test_case.tests described_class
-    test_case.destination_root = SPEC_TMP_DPR
-  end
-
-  after do
-    FileUtils.remove_entry_secure(Pathname.new(SPEC_TMP_DPR)/'db/migrate/')
-  end
-
-  shared_examples 'should_valid_as_a_ruby_script' do
-    it 'should valid as a ruby script' do
-      subject
-      rb = File.read(last_migration_file)
-      rip = Class.new(Ripper) do
-        def on_parse_error(msg)
-          raise msg
-        end
-      end
-      rip.parse(rb)
-    end
-  end
-
-  context 'when add a column' do
+  context 'when add a column', :with_doing do
     let(:arguments){%w[users +email:string]}
 
     include_examples 'should_valid_as_a_ruby_script'
@@ -41,7 +17,7 @@ describe Mi::Generators::MiGenerator do
     end
   end
 
-  context 'when remove a column' do
+  context 'when remove a column', :with_doing do
     let(:arguments){%w[users -email]}
 
     include_examples 'should_valid_as_a_ruby_script'
@@ -57,7 +33,7 @@ describe Mi::Generators::MiGenerator do
     end
   end
 
-  context 'when change column' do
+  context 'when change column', :with_doing do
     let(:arguments){%w[users %email:string:{null:true}]}
 
     include_examples 'should_valid_as_a_ruby_script'
@@ -73,7 +49,7 @@ describe Mi::Generators::MiGenerator do
     end
   end
 
-  context 'when add a column with not null' do
+  context 'when add a column with not null', :with_doing do
     let(:arguments){%w[users +email:string:{null:false,default:"foo@example.com"}]}
 
     include_examples 'should_valid_as_a_ruby_script'
