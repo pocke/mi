@@ -82,6 +82,28 @@ class ChangeEmailToUsers < ActiveRecord::Migration
 end
 ```
 
+### create_table
+
+```sh
+$ bin/rails g mi:create users +email:string:{null:false} +name:string
+      create  db/migrate/20160704144601_create_users_table.rb
+```
+
+`db/migrate/20160704144601_create_users_table.rb`
+
+```ruby
+class CreateUsersTable < ActiveRecord::Migration
+  def change
+    create_table :users do |t|
+      t.string :email, null: false
+      t.string :name
+
+      t.timestamps null: false
+    end
+  end
+end
+```
+
 ## Dependencies
 
 - Ruby 2.2 or higher
