@@ -59,4 +59,6 @@ describe Mi::Generators::MiGenerator, :with_doing do
       migration_file_include? 'add_column :users, :email, :string, null: false, default: "foo@example.com"'
     end
   end
+
+  include_examples 'open_a_editor_when_edit_option'
 end
