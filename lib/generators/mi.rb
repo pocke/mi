@@ -9,9 +9,21 @@ module Mi
     class Base < Rails::Generators::Base
       include Rails::Generators::Migration
 
+      attr_reader :arguments
+
       def self.next_migration_number(dirname)
         next_migration_number = current_migration_number(dirname) + 1
         ActiveRecord::Migration.next_migration_number(next_migration_number)
+      end
+
+      def self.editable
+        define_method :edit do
+          if @edit
+            editor = ENV['EDITOR'] || 'vim'
+            fname = File.join('db/migrate', "#{@migration_number}_#{destination}.rb")
+            system(editor, fname)
+          end
+        end
       end
 
       Methods = {
@@ -20,8 +32,20 @@ module Mi
         '%' => 'change_column',
       }.freeze
 
+      def parse_args
+        @arguments = @_initializer[0..1].flatten
+
+        if @arguments.delete('--version')
+          @version = true
+        end
+
+        if @arguments.delete('--edit')
+          @edit = true
+        end
+      end
+
       def version
-        if arguments.include?('--version')
+        if @version
           puts Mi::VERSION
           exit 0 # XXX:
         end
@@ -30,9 +54,6 @@ module Mi
 
       private
 
-      def arguments
-        @_initializer[0..1].flatten
-      end
 
       def arg_groups
         @arg_groups ||= (
