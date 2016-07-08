@@ -35,4 +35,16 @@ module UtilsExtend
       FileUtils.remove_entry_secure(Pathname.new(SPEC_TMP_DPR)/'db/migrate/')
     end
   end
+
+  shared_examples 'open_a_editor_when_edit_option' do
+    context 'when has a --edit option' do
+      let(:arguments){%w[users +email:string --edit]}
+
+      it 'should open a editor' do
+        editor = ENV['EDITOR'] || 'vim'
+        expect_any_instance_of(Object).to receive(:system).with(editor, String)
+        subject
+      end
+    end
+  end
 end

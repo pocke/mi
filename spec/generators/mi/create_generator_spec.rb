@@ -51,4 +51,6 @@ describe Mi::Generators::CreateGenerator, :with_doing do
       expect{subject}.to raise_error Mi::Generators::CreateGenerator::NotAllowMethod
     end
   end
+
+  include_examples 'open_a_editor_when_edit_option'
 end

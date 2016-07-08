@@ -12,6 +12,8 @@ module Mi
         migration_template('create.rb.erb', "db/migrate/#{destination}.rb")
       end
 
+      editable
+
 
       private
 
