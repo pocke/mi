@@ -41,7 +41,8 @@ module UtilsExtend
       let(:arguments){%w[users +email:string --edit]}
 
       it 'should open a editor' do
-        expect_any_instance_of(Object).to receive(:system).with(ENV['EDITOR'], String)
+        editor = ENV['EDITOR'] || 'vim'
+        expect_any_instance_of(Object).to receive(:system).with(editor, String)
         subject
       end
     end
