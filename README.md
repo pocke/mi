@@ -104,6 +104,15 @@ class CreateUsersTable < ActiveRecord::Migration
 end
 ```
 
+
+### Open with editor
+
+Put a `--edit` option, mi opens the migration file after generated.
+
+```sh
+$ bin/rails g mi users +email:string --edit
+```
+
 ## Dependencies
 
 - Ruby 2.2 or higher
