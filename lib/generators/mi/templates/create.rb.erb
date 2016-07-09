@@ -1,4 +1,4 @@
-class <%= migration_class_name %> < ActiveRecord::Migration
+class <%= migration_class_name %> < ActiveRecord::Migration<%= migration_version %>
   def change
     create_table :<%= table_name %> do |t|
 <%- arg_groups.each do |_table, columns| -%>

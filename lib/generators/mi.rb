@@ -87,6 +87,11 @@ module Mi
         name = name[1..-1]
         {name: name, type: type, options: options, method: method}
       end
+
+      def migration_version
+        return "" unless defined? ActiveRecord::Migration.current_version
+        "[#{ActiveRecord::Migration.current_version}]"
+      end
     end
   end
 end
