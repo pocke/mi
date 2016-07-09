@@ -119,10 +119,6 @@ $ bin/rails g mi users +email:string --edit
 - Rails 4
 
 
-## TODOs
-
-- Support Rails 5 [#12](https://github.com/pocke/mi/issues/12)
-
 
 ## Contributing
 
