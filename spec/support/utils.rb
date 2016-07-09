@@ -47,4 +47,27 @@ module UtilsExtend
       end
     end
   end
+
+  shared_examples 'with_rails_version' do
+    context 'Rails version specified' do
+      let(:arguments){%w[users +email:string]}
+      include_examples 'should_valid_as_a_ruby_script'
+
+      if Rails.version.to_i >= 5
+        context 'when >= 5' do
+          it 'has Rails version' do
+            subject
+            migration_file_include? "ActiveRecord::Migration[#{Rails.version.to_f}]\n"
+          end
+        end
+      else
+        context 'when <= 4' do
+          it 'has Rails version' do
+            subject
+            migration_file_include? "ActiveRecord::Migration\n"
+          end
+        end
+      end
+    end
+  end
 end

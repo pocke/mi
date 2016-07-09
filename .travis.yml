@@ -5,6 +5,12 @@ rvm:
   - 2.3.1
   - ruby-head
 
+gemfile:
+  - gemfiles/rails40.gemfile
+  - gemfiles/rails41.gemfile
+  - gemfiles/rails42.gemfile
+  - gemfiles/rails50.gemfile
+
 cache: bundler
 bundler_args: --jobs=4 --retry=3
 sudo: false
