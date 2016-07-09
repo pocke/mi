@@ -128,3 +128,4 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/pocke/
 ## Links
 
 - [もっと便利に rails g migration する - pockestrap](http://pocke.hatenablog.com/entry/2016/05/01/132228)
+- [Railsのマイグレーション生成をもっともっとImprovementする! mi gem version 1.0.0 をリリースしました! - pockestrap](http://pocke.hatenablog.com/entry/2016/07/09/180706)
