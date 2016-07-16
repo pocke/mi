@@ -1,3 +1,5 @@
+require 'stringio'
+
 module UtilsInclude
   def last_migration_file
     Dir.glob(Pathname.new(SPEC_TMP_DPR)/'db/migrate/*.rb').sort.last
@@ -32,7 +34,7 @@ module UtilsExtend
     end
 
     after do
-      FileUtils.remove_entry_secure(Pathname.new(SPEC_TMP_DPR)/'db/migrate/')
+      FileUtils.remove_entry_secure(Pathname.new(SPEC_TMP_DPR)/'db/migrate/', true)
     end
   end
 
@@ -67,6 +69,17 @@ module UtilsExtend
             migration_file_include? "ActiveRecord::Migration\n"
           end
         end
+      end
+    end
+  end
+
+  shared_examples 'with_version_option' do
+    context 'with --version option' do
+      let(:arguments){%w[--version]}
+
+      it do
+        expect_any_instance_of(Object).to receive(:puts).with Mi::VERSION
+        expect{subject}.to raise_error SystemExit
       end
     end
   end

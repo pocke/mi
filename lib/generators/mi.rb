@@ -47,7 +47,7 @@ module Mi
       def version
         if @version
           puts Mi::VERSION
-          exit 0 # XXX:
+          exit 0
         end
       end
 

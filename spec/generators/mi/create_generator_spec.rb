@@ -54,4 +54,5 @@ describe Mi::Generators::CreateGenerator, :with_doing do
 
   include_examples 'open_a_editor_when_edit_option'
   include_examples 'with_rails_version'
+  include_examples 'with_version_option'
 end
