@@ -116,7 +116,7 @@ $ bin/rails g mi users +email:string --edit
 ## Dependencies
 
 - Ruby 2.2 or higher
-- Rails 4
+- Rails 4 or higher
 
 
 
